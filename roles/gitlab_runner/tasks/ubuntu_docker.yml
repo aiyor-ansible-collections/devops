@@ -1,6 +1,6 @@
 ---
 - name: Add Docker apt key
-  ansible.builtin.apt.key:
+  ansible.builtin.apt_key:
     url: '{{ docker_apt_key_url }}'
     state: present
 
@@ -9,7 +9,8 @@
     repo: 'deb [arch="amd64"] {{ docker_apt_repo }}'
     state: present
 
-- name: Install Docker
-  ansible.builtin.apt.key:
-    name: '{{ docker_apt_package }}'
+- name: Install Docker packages
+  ansible.builtin.apt:
+    name: '{{ docker_apt_packages }}'
     state: present
+    update_cache: true

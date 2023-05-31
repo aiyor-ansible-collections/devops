@@ -1,6 +1,9 @@
 ---
 # tasks file for gitlab_runner
 
-- name: Install on Ubuntu
+- name: Install Gitlab runner on Ubuntu
   import_tasks: ubuntu.yml
   when: ansible_distribution_release in ['focal', 'jammy']
+
+- name: Register Gitlab runner
+  import_tasks: register_runner.yml

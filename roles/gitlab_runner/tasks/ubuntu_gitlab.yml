@@ -6,16 +6,17 @@
 
 - name: Add Gitlab apt repository
   ansible.builtin.apt_repository:
-    repo: 
-      - 'deb {{ gitlab_apt_repo }}'
-      - 'deb-src {{ gitlab_apt_repo }}'
+    repo: '{{ item }}'
     state: present
+  loop:
+    - 'deb {{ gitlab_apt_repo }}'
+    - 'deb-src {{ gitlab_apt_repo }}'
 
 - name: Install Gitlab runner pacakge(s)
-  ansible.builtin.apt_key:
+  ansible.builtin.apt:
     name: '{{ gitlab_apt_packages }}'
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Add Gitlab Runner user to Docker group
   ansible.builtin.user:

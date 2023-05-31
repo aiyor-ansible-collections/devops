@@ -1,4 +1,2 @@
 ---
 # defaults file for workstation
-
-apt_gpg_key_url: https://packages.gitlab.com/runner/gitlab-runner/gpgkey

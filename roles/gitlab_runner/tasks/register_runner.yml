@@ -1,3 +1,22 @@
 ---
+- name: Build Gitlab Runner register command
+  set_fact:
+    gitlab_runner_register_cmd: |
+      gitlab-runner register
+      --non-interactive
+      --url {{ gitlab_runner_reg_url | quote }}
+      --token {{ gitlab_auth_token | quote }}
+      --executor {{ gitlab_runner_executor | quote }}
+      --docker-image {{ gitlab_default_runner_image | quote }}
+
 - name: Register Gitlab Runner
-  
+  ansible.builtin.command:
+    cmd: "{{ gitlab_runner_register_cmd}}"
+    creates: /etc/gitlab-runner/gitlab.registered.ansible
+
+- name: (Force) Register Gitlab Runner
+  ansible.builtin.command:
+    cmd: "{{ gitlab_runner_register_cmd}}"
+  tags:
+    - force_register_runner
+    - never

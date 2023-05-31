@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  vars:
+    gitlab_auth_token:
+  roles:
+    - gitlab_runner
