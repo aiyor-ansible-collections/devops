@@ -1,0 +1,10 @@
+---
+- name: Ensure prerequisites are installed
+  import_tasks: ubuntu_reqs.yml
+
+- name: Install Docker (Optional. Default yes)
+  import_tasks: ubuntu_docker.yml
+  when: enable_docker_for_gitlab
+
+- name: Install Gitlab Runner
+  import_tasks: ubuntu_gitlab.yml

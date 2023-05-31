@@ -1,0 +1,11 @@
+---
+- name: Ensure prerequisites packages exist
+  ansible.builtin.apt:
+    pkg:
+      - gnupg
+      - curl
+      - debian-archive-keyring
+      - apt-transport-https
+      - ca-certificates
+    state: present
+    update_cache: yes

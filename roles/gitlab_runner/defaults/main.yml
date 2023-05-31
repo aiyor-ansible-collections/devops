@@ -1,0 +1,17 @@
+---
+# defaults file for gitlab_runner
+enable_docker_for_gitlab: true
+
+docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_apt_repo: 'https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+docker_apt_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+gitlab_apt_key_url: https://packages.gitlab.com/runner/gitlab-runner/gpgkey
+gitlab_apt_repo: 'https://packages.gitlab.com/runner/gitlab-runner/ubuntu/ {{ ansible_distribution_release }} main'
+gitlab_apt_packages: gitlab-runner
+gitlab_runner_user: gitlab-runner
