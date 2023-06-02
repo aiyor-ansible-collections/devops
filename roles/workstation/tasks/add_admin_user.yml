@@ -1,0 +1,43 @@
+---
+- name: Create corresponding group for admin user, with identical name and ID
+  ansible.builtin.group:
+    name: '{{ admin_username }}'
+    state: present
+    gid: '{{ admin_userid }}'
+
+- name: Create user
+  ansible.builtin.user:
+    name: '{{ admin_username }}'
+    shell: '{{ admin_shell }}'
+    state: present
+    uid: '{{ admin_userid }}'
+    group: '{{ admin_username }}'
+    groups: sudo,docker
+    append: true
+
+- name: Collate authorized ssh key(s)
+  set_fact:
+    ssh_keys_from_urls: '{{ ssh_keys_from_urls + [lookup("url", item, split_lines=false) | default([])] }}'
+  loop: '{{ admin_authorized_ssh_key_urls }}'
+  vars:
+    ssh_keys_from_urls: []
+  
+- name: Combine authorized ssh keys (from url) and ssh keys from input string
+  set_fact:
+    admin_authorized_ssh_keys: "{{ (ssh_keys_from_urls + admin_authorized_ssh_key_strings) | flatten | join('\n') }}"
+
+- name: Set authorized ssh key for admin user
+  ansible.posix.authorized_key:
+    user: '{{ admin_username }}'
+    key: '{{ admin_authorized_ssh_keys }}'
+    state: present
+    exclusive: true
+#  loop: '{{ admin_authorized_ssh_keys }}'
+
+- name: Setup admin user sudo config
+  ansible.builtin.template:
+    src: admin_user_sudo.j2
+    dest: '/etc/sudoers.d/user-{{ admin_username }}'
+    owner: root
+    group: root
+    mode: '0660'

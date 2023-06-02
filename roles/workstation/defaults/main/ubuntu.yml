@@ -1,0 +1,44 @@
+---
+# defaults file for Fedora
+
+apt_packages:
+  - gnupg
+  - curl
+  - debian-archive-keyring
+  - apt-transport-https
+  - ca-certificates
+  - openssl
+  - git
+  - jq
+  - zip
+  - unzip
+  - openssh-client
+  - wget
+  - software-properties-common
+  - dnsutils
+  - sshpass
+
+docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_apt_repo: 'https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+docker_apt_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+azcli_apt_key_url: https://packages.microsoft.com/keys/microsoft.asc
+azcli_apt_repo: 'https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main'
+azcli_apt_packages:
+  - azure-cli
+
+gcloud_apt_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+gcloud_apt_repo: 'https://packages.cloud.google.com/apt cloud-sdk main'
+gcloud_apt_packages:
+  - google-cloud-cli
+
+
+additional_apt_packages:
+  - '{{ docker_apt_packages }}'
+  - '{{ azcli_apt_packages }}'
+  - '{{ gcloud_apt_packages }}'

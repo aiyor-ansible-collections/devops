@@ -1,0 +1,25 @@
+---
+# defaults file for Fedora
+
+dnf_packages:
+  - dnf-plugins-core
+  - python-pip3
+  - gnupg
+  - curl
+  - ca-certificates
+  - openssl
+  - git
+  - jq
+  - zip
+  - unzip
+  - openssh-client
+  - wget
+  - dnsutils
+  - sshpass
+
+docker_dnf_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin

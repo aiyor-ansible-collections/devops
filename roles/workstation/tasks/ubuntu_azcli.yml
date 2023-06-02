@@ -1,0 +1,12 @@
+---
+- name: Add Azure CLI Repository
+  block:
+    - name: Get Azure CLI apt key
+      ansible.builtin.get_url:
+        url: '{{ azcli_apt_key_url }}'
+        dest: /etc/apt/keyrings/azcli.asc
+
+    - name: Add Azure CLI apt repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch="amd64" signed-by=/etc/apt/keyrings/azcli.asc] {{ azcli_apt_repo }}'
+        state: present

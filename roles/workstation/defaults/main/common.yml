@@ -1,0 +1,7 @@
+admin_username: devops
+admin_userid: 8888
+admin_shell: /bin/bash
+admin_authorized_ssh_key_strings: []
+admin_authorized_ssh_key_urls: []
+
+

@@ -14,6 +14,7 @@
     cmd: "{{ gitlab_runner_register_cmd}}"
     creates: /etc/gitlab-runner/gitlab.registered.ansible
 
+# This task will only run when targeted using tag 'force_register_runner'
 - name: (Force) Register Gitlab Runner
   ansible.builtin.command:
     cmd: "{{ gitlab_runner_register_cmd}}"

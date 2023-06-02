@@ -1,2 +1,8 @@
 ---
 # tasks file for workstation
+- name: Setup on Ubuntu
+  import_tasks: ubuntu.yml
+  when: ansible_distribution_release in ['focal', 'jammy']
+
+- name: Setup DevOps admin user
+  import_tasks: add_admin_user.yml

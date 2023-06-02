@@ -1,0 +1,12 @@
+---
+- name: Add Docker Repository
+  block:
+    - name: Get Docker apt key
+      ansible.builtin.get_url:
+        url: '{{ docker_apt_key_url }}'
+        dest: /etc/apt/keyrings/docker.asc
+
+    - name: Add Docker apt repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch="amd64" signed-by=/etc/apt/keyrings/docker.asc] {{ docker_apt_repo }}'
+        state: present

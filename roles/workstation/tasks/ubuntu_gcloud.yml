@@ -1,0 +1,12 @@
+---
+- name: Add gcloud Repository
+  block:
+    - name: Get gcloud apt key
+      ansible.builtin.get_url:
+        url: '{{ gcloud_apt_key_url }}'
+        dest: /etc/apt/keyrings/gcloud.asc
+
+    - name: Add gcloud apt repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch="amd64" signed-by=/etc/apt/keyrings/gcloud.asc] {{ gcloud_apt_repo }}'
+        state: present

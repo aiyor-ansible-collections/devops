@@ -1,0 +1,6 @@
+---
+- name: Ensure prerequisites packages exist
+  ansible.builtin.apt:
+    pkg: '{{ apt_packages }}'
+    state: present
+    update_cache: yes

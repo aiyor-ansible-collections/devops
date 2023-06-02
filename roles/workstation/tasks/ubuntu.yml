@@ -1,0 +1,6 @@
+---
+- name: Ensure prerequisites are installed
+  import_tasks: ubuntu_reqs.yml
+
+- name: Install additional packages
+  import_tasks: ubuntu_additional_packages.yml

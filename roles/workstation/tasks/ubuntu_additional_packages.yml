@@ -1,0 +1,15 @@
+---
+- name: Add Docker Repo
+  import_tasks: ubuntu_docker.yml
+
+- name: Add Google Cloud SDK repo
+  import_tasks: ubuntu_gcloud.yml
+
+- name: Add Azure CLI repo
+  import_tasks: ubuntu_azcli.yml
+
+- name: Install additional packages
+  ansible.builtin.apt:
+    pkg: '{{ additional_apt_packages | flatten }}'
+    state: present
+    update_cache: yes
